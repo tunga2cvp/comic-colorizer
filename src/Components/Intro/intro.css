@@ -1,0 +1,50 @@
+@import url(https://fonts.googleapis.com/css?family=Bangers);
+.intro-container img {
+  width: 40%;
+}
+.intro-container {
+  background-image: url(/public/assets/intro-background.jpg);
+  min-height: 700px;
+  text-align: center;
+  justify-content: center;
+  background-size: 100%;
+}
+/* .inner-box{
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 95%);
+  background-image: url(/public/assets/intro-background.jpg);
+  min-height: 700px;
+  bottom: -20%;
+  z-index: -1;
+  background-size: 100%;
+} */
+.box {
+  margin: 10px 25px 10px 25px;
+  border: solid black;
+  border-color: black;
+}
+
+.box1 {
+  border-width: 3px 4px 3px 5px;
+}
+.evenboxinner {
+  margin: 15px;
+  padding: 10px;
+  background: #ddd;
+  border: 1px solid #222;
+  box-shadow: 3px 3px 0 #222;
+  font-family: "Bangers", cursive;
+  font-size: larger;
+}
+
+button:hover{
+    background: linear-gradient(to bottom, #0066ff 0%, #ff99cc 100%);
+    color: white;
+    cursor: pointer;
+}
+
+.info{
+  padding: 20px;
+  padding-bottom: 30px;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-size: large;
+}
