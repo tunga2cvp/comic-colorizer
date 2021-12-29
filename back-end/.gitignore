@@ -90,3 +90,12 @@ target/
 
 gaenv_lib/
 appengine_config.py
+
+# Model (large file)
+model_unet_resnet_rgb_color/
+unet_rgb/
+
+# tmp Storage
+result_images/
+source_images/
+supplement_images/
