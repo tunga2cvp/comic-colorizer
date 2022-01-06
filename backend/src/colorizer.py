@@ -1,12 +1,12 @@
 import os
-import backend.config as config
+import config
 import matplotlib.pyplot as plt
 import numpy as np  # linear algebra
 import tensorflow as tf
 from flask import Flask, send_file, request, flash
 from flask_restx import Resource, Api
 from werkzeug.utils import secure_filename
-from utils import extract_roi, colorize_page, display_page
+from .utils import extract_roi, colorize_page, display_page
 
 
 file_name = 'resources/pictures/sample_page.png'
@@ -42,14 +42,14 @@ def predict_mode_3(color_mode=True, color_space='rgb', color=None, filename=None
 def predict(mode=0, filename=None, src_img=None, color=None):
     color_after = None
     if mode == 1:
-        color_after = predict_mode_1(color_mode=True, filename=f'log/source_images/{filename}')
+        color_after = predict_mode_1(color_mode=True, filename=f'{config.SOURCE_IMAGES_PATH}/{filename}')
     elif mode == 2:
-        color_after = predict_mode_2(color_mode=True, filename=f'log/source_images/{filename}',
-                                     src_img=f'log/supplement_images/{src_img}')
+        color_after = predict_mode_2(color_mode=True, filename=f'{config.SOURCE_IMAGES_PATH}/{filename}',
+                                     src_img=f'{config.SUPPLEMENT_IMAGES_PATH}/{src_img}')
     elif mode == 3:
-        color_after = predict_mode_3(color_mode=True, filename=f'log/source_images/{filename}', color=color)
+        color_after = predict_mode_3(color_mode=True, filename=f'{config.SOURCE_IMAGES_PATH}/{filename}', color=color)
     if color_after is not None:
-        plt.imsave(f'result_images/{filename}', np.clip(color_after, 0.0, 1.0))
+        plt.imsave(f'{config.RESULT_IMAGES_PATH}/{filename}', np.clip(color_after, 0.0, 1.0))
 
 
 

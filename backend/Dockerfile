@@ -18,4 +18,4 @@ RUN apt-get purge -y --auto-remove && apt-get purge -y --auto-remove && rm -rf /
 
 ADD . .
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+ENTRYPOINT ["python", "/app/app.py"]
