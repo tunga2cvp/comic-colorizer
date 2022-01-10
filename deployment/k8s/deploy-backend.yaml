@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comic-colorizer-backend
+spec:
+  selector:
+    matchLabels:
+      app: comic-colorizer-backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: comic-colorizer-backend
+    spec:
+      containers:
+        - name: comic-colorizer-backend
+          image: asia-southeast1-docker.pkg.dev/comvis-ict-2021/comic-colorizer/comic-colorizer-backend:v1
+          ports:
+            - containerPort: 5000
+          resources:
+            limits:
+              cpu: "2"
+            requests:
+              cpu: "2"
+      restartPolicy: Always
