@@ -39,8 +39,8 @@ def setup_logger():
 setup_logger()
 
 
-MODEL_1_PATH = ROOT_DIR + '/model/unet_color_rgb'
-MODEL_2_PATH = ROOT_DIR + '/model/unet_rgb'
+MODEL_1_PATH = ROOT_DIR + '/model/unet_rgb'
+MODEL_2_PATH = ROOT_DIR + '/model/unet_color_rgb'
 
 SOURCE_IMAGES_PATH = ROOT_DIR + '/log/source_images'
 RESULT_IMAGES_PATH = ROOT_DIR + '/log/result_images'

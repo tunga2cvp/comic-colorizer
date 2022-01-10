@@ -490,9 +490,9 @@ def clean_image_folder_after(s):
     import threading
 
     try:
-        t1 = threading.Thread(target=clean_image_folder)
+        t1 = threading.Thread(target=clean_image_folder, args=(s,))
         t1.start()
-        t1.join()
+        # t1.join()
     except:
         print("Error cleaning image folder.")
 
