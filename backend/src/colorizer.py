@@ -18,7 +18,7 @@ roi_ls = extract_roi(file_name, threshold_roi=1 / 16)
 
 def predict_mode_1(color_mode=False, color_space='rgb', filename=None):
     output, y_img = colorize_page(model_rgb, roi_ls, resnet=resnet, color_space=color_space, color_mode=color_mode)
-    self_color = display_page(filename, output, y_img, color_space='rgb')
+    self_color = display_page(filename, output, y_img)
     return self_color
 
 
@@ -27,7 +27,7 @@ def predict_mode_2(color_mode=True, color_space='rgb', src_img=None, filename=No
     output, y_img = colorize_page(model_color_rgb, roi_ls, resnet=resnet, color_space=color_space,
                                   color_mode=color_mode,
                                   src_img=src_img)
-    img_color = display_page(filename, output, y_img, color_space='rgb')
+    img_color = display_page(filename, output, y_img)
     return img_color
 
 
@@ -35,7 +35,7 @@ def predict_mode_2(color_mode=True, color_space='rgb', src_img=None, filename=No
 def predict_mode_3(color_mode=True, color_space='rgb', color=None, filename=None):
     output, y_img = colorize_page(model_color_rgb, roi_ls, resnet=resnet, color_space=color_space,
                                   color_mode=color_mode, src_color=color)
-    palette_color = display_page(filename, output, y_img, color_space='rgb')
+    palette_color = display_page(filename, output, y_img)
     return palette_color
 
 
