@@ -9,6 +9,7 @@ from tensorflow.keras.applications.inception_resnet_v2 import preprocess_input
 from skimage.color import rgb2lab, lab2rgb, rgb2gray, gray2rgb
 from skimage.transform import resize
 
+import config
 
 HEIGHT=256
 WIDTH=256
@@ -469,6 +470,31 @@ class ColorModel():
                                     is_save=is_save
                                     )
         return colored_page
+
+def clean_image_folder(s):
+    import os, shutil
+    import time
+    time.sleep(s)
+    for folder in [config.SOURCE_IMAGES_PATH, config.RESULT_IMAGES_PATH, config.SUPPLEMENT_IMAGES_PATH]:
+        for filename in os.listdir(folder):
+            file_path = os.path.join(folder, filename)
+            try:
+                if os.path.isfile(file_path) or os.path.islink(file_path):
+                    os.unlink(file_path)
+                elif os.path.isdir(file_path):
+                    shutil.rmtree(file_path)
+            except Exception as e:
+                print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+def clean_image_folder_after(s):
+    import threading
+
+    try:
+        t1 = threading.Thread(target=clean_image_folder)
+        t1.start()
+        t1.join()
+    except:
+        print("Error cleaning image folder.")
 
 
     
