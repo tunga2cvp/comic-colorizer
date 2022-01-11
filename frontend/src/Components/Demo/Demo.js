@@ -7,7 +7,7 @@ const NoColor = () => {
             <div className='box1 no-color-outer-box'>
                 <div><p className="text top-left">Look at this sad, coloress comic book</p></div>
                 <div className='flipbook-container'>
-                    <HTMLFlipBook width={340} height={531.83}>
+                    <HTMLFlipBook width={320} height={486.25}>
                         <div className="demoPage odd-page">
                             <img src="/assets/sample_imgs/sample_page1.jpg" alt='pic1'></img>
                         </div>
@@ -67,8 +67,8 @@ const ImageComparison = () => {
     
                 <div className='slider-container'>
                     <ReactCompareSlider
-                    itemOne={<ReactCompareSliderImage src="/assets/sample_imgs/original_2.png" alt="Image one" />}
-                    itemTwo={<ReactCompareSliderImage src="/assets/sample_imgs/fullpage.jpg" alt="Image two" />}
+                    itemOne={<ReactCompareSliderImage src="/assets/sample_imgs/pretty_before.png" alt="Image one" />}
+                    itemTwo={<ReactCompareSliderImage src="/assets/sample_imgs/pretty.jpg" alt="Image two" />}
                 /></div>
                 </div>
                 <p className="text bottom-right">Nah, it's Computer Vision ...</p>

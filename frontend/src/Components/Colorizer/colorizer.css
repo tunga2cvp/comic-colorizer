@@ -15,8 +15,8 @@
 }
 
 .color-picker{
-  min-height: 700px;
-  width: 30%;
+  /* min-height: 700px; */
+  /* width: 30%; */
   margin-right: 10;
   background-color: #fefefe;
   margin: 10px 10px 10px 25px;
@@ -27,7 +27,7 @@
   text-align: center;
 }
 .param-picker{
-  min-height: 700px;
+  /* min-height: 700px; */
   width: 35%;
   margin-right: 10;
   background-color: #fefefe;
@@ -39,7 +39,7 @@
   text-align: center;
 }
 .advance-image-holder{
-  min-height: 700px;
+  /* min-height: 700px; */
   width: 35%;
   margin-right: 10;
   background-color: #fefefe;
@@ -49,6 +49,28 @@
   border-width: 3px 4px 3px 5px; */
   justify-content: center;
   text-align: center;
+}
+.preview-image-holder{
+  /* min-height: 700px; */
+  width: 35%;
+  margin-right: 10;
+  background-color: #fefefe;
+  margin: 10px 10px 10px 25px;
+  /* border: solid black;
+  border-color: black;
+  border-width: 3px 4px 3px 5px; */
+  justify-content: center;
+  text-align: center;
+}
+.result-image-holder{
+    /* min-height: 700px; */
+    width: 90%;
+    margin-right: 10;
+    background-color: #fefefe;
+    margin-left: 5%;
+    justify-content: center;
+    text-align: center;
+    display: none;
 }
 .double-image-wrapper {
   min-height: 600px;
@@ -61,7 +83,7 @@
   border-width: 3px 4px 3px 5px;
 }
 .advance-wrapper {
-  min-height: 700px;
+  /* min-height: 700px; */
   /* width: 60%; */
   background-color: #fefefe;
   border: solid black;
@@ -139,6 +161,32 @@
 .image-holder img{
   max-width: 100%;
 }
+.custom-image-holder{
+  width: 80%;
+  margin-left: 10%;
+  min-height: 400px;
+  margin-top: 40px;
+  /* border: 1px solid black; */
+  border-width: 3px;
+  border-style: solid;
+}
+
+.result-custom-image-holder{
+  width: 50%;
+  margin-left: 25%;
+  min-height: 400px;
+  margin-top: 40px;
+  /* border: 1px solid black; */
+  border-width: 3px;
+  border-style: solid;
+}
+.result-custom-image-holder img{
+  max-height:100%; max-width:100%;
+}
+.custom-image-holder img{
+  max-width: 100%;
+  max-height:100%
+}
 .double-image-holder {
   width: 80%;
   margin-left: 10%;
@@ -152,8 +200,8 @@
 .triple-image-holder {
   width: 90%;
   margin-left: 5%;
-  min-height: 700px;
-  margin-top: 100px;
+  /* min-height: 700px; */
+  margin-top: 20px;
   /* border-width: 3px;
   border-style: solid; */
   display: flex;
@@ -357,7 +405,7 @@
   }
 
   .color-selector{
-    display: flex;
+    display: inline-flex;
     align-content: flex-start;
     padding: 10px;
     padding-left: 45px;
@@ -368,7 +416,7 @@
   }
   .inline-block{
     margin-top: 10px;
-    /* padding-left: 35px; */
+    padding-left: 35px;
     display: inline-block;
     margin-right: 50px;
   }
@@ -607,6 +655,7 @@
 .wrapper {
   display: flex;
   justify-content: center;
+  padding-bottom: 5%;
 }
 .cta {
     display: flex;
@@ -694,16 +743,14 @@ h1 {
   text-align: center;
   color: #353535;
   font-size: 50px;
-  font-family: "Cormorant Garamond", serif;
 }
 
-p {
-  font-family: 'Lato', sans-serif;
+/* p {
   font-weight: 300;
   text-align: center;
   font-size: 18px;
   color: #676767;
-}
+} */
 .frame {
   width: 90%;
   margin: 40px auto;
@@ -718,7 +765,6 @@ button {
   color: #fff;
   border-radius: 5px;
   padding: 10px 25px;
-  font-family: 'Lato', sans-serif;
   font-weight: 500;
   background: transparent;
   cursor: pointer;
@@ -1459,4 +1505,369 @@ background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
 }
 .btn-16:active {
   top: 2px;
+}
+
+#loading-wrapper-advance{
+  /* position: fixed; */
+  width: 100%;
+  height: 100%;
+  /* left: 0;
+  top: 0; */
+  text-align: center;
+  justify-content: center;
+  padding-left: 44%;
+  /* padding-top: 5%; */
+  padding-bottom: 5%;
+  display: none;
+}
+
+/* .bubble containers: add the texture above a solid background */
+.bubble {
+  /* cap the width */
+  max-width: 500px;
+  /* give ample whitespace around and inside of the container */
+  margin: 2rem 0;
+  padding: 0.2rem 1.25rem;
+  text-align: center;
+  font-family: "Dekko", cursive;
+  text-transform: uppercase;
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+  background: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(25)" opacity="0.3" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g  fill="%23250E17"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>'),
+    #fff;
+  background-size: 12px, 100%;
+  /* solid border */
+  border: 0.4rem solid #000;
+  /* position relative for the :before pseudo element */
+  position: relative;
+}
+
+/* for the highlight container change the solid backgorund to a yellow-ish hue */
+.bubble--highlight {
+  background: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(25)" opacity="0.8" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g  fill="%23d68810"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>'),
+    #ffcd28;
+  background-size: 13px, 100%;
+  font-weight: 700;
+}
+/* for the highlight container always add an exclamation point */
+.bubble--highlight:after {
+  content: "!";
+}
+/* for every .bubble container add a solid background behind the container itself, slightly offset */
+.bubble:before {
+  content: "";
+  position: absolute;
+  left: -1rem;
+  top: 0.15rem;
+  width: 100%;
+  height: 100%;
+  /* with the same texture, but different color, for both the texture and the background */
+  background: url('data:image/svg+xml;utf8,<svg width="100" height="100" transform="rotate(35)" opacity="1" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="%23250E17"><circle cx="25" cy="25" r="12.5"/><circle cx="75" cy="75" r="12.5"/><circle cx="75" cy="25" r="12.5"/><circle cx="25" cy="75" r="12.5"/></g></svg>'),
+    #000;
+  background-size: 12px, 100%;
+  border: 0.4rem solid #000;
+  z-index: -5;
+}
+
+/* for the tag, add a lot of whitespace below the string, to include the name through the pseudo element */
+.tag {
+  margin-bottom: 2rem;
+  padding: 1rem 7.5rem 11rem;
+  border-radius: 30px;
+  font-size: 2rem;
+  color: #fff;
+  background: #f8012d;
+  text-align: center;
+  font-family: "Lato", sans-serif;
+  box-shadow: 0 1px 15px -7.5px #000000;
+  /* position relative for the pseudo element(s) */
+  position: relative;
+}
+.tag strong {
+  text-transform: uppercase;
+  font-size: 3.5rem;
+}
+/* with the :before pseudo element include a solid white background */
+.tag:before {
+  content: "";
+  position: absolute;
+  top: 9rem;
+  left: 2%;
+  width: 96%;
+  height: 9rem;
+  background: #fff;
+  /* border-radius mathing the .tag container */
+  border-radius: 0 0 30px 30px;
+}
+/* with the :after pseudo element add the name of the character */
+.tag:after {
+  content: "Peter Parker";
+  position: absolute;
+  top: 11.25rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-family: "Rock Salt", cursive;
+  font-size: 2rem;
+  letter-spacing: 0.25rem;
+  font-weight: 300;
+  font-weight: bold;
+  color: #000;
+}
+
+.buble-wrap{
+  place-items: center;
+  display: grid;
+  width: 100%;
+}
+
+
+
+/* CSS talk bubble */
+.talk-bubble {
+	margin: 5px;
+  display: inline-block;
+  position: relative;
+	/* width: 200px; */
+	height: auto;
+	background-color: lightyellow;
+  float: left;
+}
+.border{
+  border: 8px solid #666;
+}
+.round{
+  border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+
+}
+
+/* Right triangle placed top left flush. */
+.tri-right.border.left-top:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: -40px;
+	right: auto;
+  top: -8px;
+	bottom: auto;
+	border: 32px solid;
+	border-color: #666 transparent transparent transparent;
+}
+.tri-right.left-top:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: -20px;
+	right: auto;
+  top: 0px;
+	bottom: auto;
+	border: 22px solid;
+	border-color: lightyellow transparent transparent transparent;
+}
+
+/* Right triangle, left side slightly down */
+.tri-right.border.left-in:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: -40px;
+	right: auto;
+  top: 30px;
+	bottom: auto;
+	border: 20px solid;
+	border-color: #666 #666 transparent transparent;
+}
+.tri-right.left-in:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: -20px;
+	right: auto;
+  top: 38px;
+	bottom: auto;
+	border: 12px solid;
+	border-color: lightyellow lightyellow transparent transparent;
+}
+
+/*Right triangle, placed bottom left side slightly in*/
+.tri-right.border.btm-left:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: -8px;
+  right: auto;
+  top: auto;
+	bottom: -40px;
+	border: 32px solid;
+	border-color: transparent transparent transparent #666;
+}
+.tri-right.btm-left:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 0px;
+  right: auto;
+  top: auto;
+	bottom: -20px;
+	border: 22px solid;
+	border-color: transparent transparent transparent lightyellow;
+}
+
+/*Right triangle, placed bottom left side slightly in*/
+.tri-right.border.btm-left-in:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 30px;
+  right: auto;
+  top: auto;
+	bottom: -40px;
+	border: 20px solid;
+	border-color: #666 transparent transparent #666;
+}
+.tri-right.btm-left-in:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 38px;
+  right: auto;
+  top: auto;
+	bottom: -20px;
+	border: 12px solid;
+	border-color: lightyellow transparent transparent lightyellow;
+}
+
+/*Right triangle, placed bottom right side slightly in*/
+.tri-right.border.btm-right-in:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: auto;
+	right: 30px;
+	bottom: -40px;
+	border: 20px solid;
+	border-color: #666 #666 transparent transparent;
+}
+.tri-right.btm-right-in:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: auto;
+	right: 38px;
+	bottom: -20px;
+	border: 12px solid;
+	border-color: lightyellow lightyellow transparent transparent;
+}
+/*
+	left: -8px;
+  right: auto;
+  top: auto;
+	bottom: -40px;
+	border: 32px solid;
+	border-color: transparent transparent transparent #666;
+	left: 0px;
+  right: auto;
+  top: auto;
+	bottom: -20px;
+	border: 22px solid;
+	border-color: transparent transparent transparent lightyellow;
+
+/*Right triangle, placed bottom right side slightly in*/
+.tri-right.border.btm-right:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: auto;
+	right: -8px;
+	bottom: -40px;
+	border: 20px solid;
+	border-color: #666 #666 transparent transparent;
+}
+.tri-right.btm-right:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: auto;
+	right: 0px;
+	bottom: -20px;
+	border: 12px solid;
+	border-color: lightyellow lightyellow transparent transparent;
+}
+
+/* Right triangle, right side slightly down*/
+.tri-right.border.right-in:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: auto;
+	right: -40px;
+  top: 30px;
+	bottom: auto;
+	border: 20px solid;
+	border-color: #666 transparent transparent #666;
+}
+.tri-right.right-in:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: auto;
+	right: -20px;
+  top: 38px;
+	bottom: auto;
+	border: 12px solid;
+	border-color: lightyellow transparent transparent lightyellow;
+}
+
+/* Right triangle placed top right flush. */
+.tri-right.border.right-top:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: auto;
+	right: -40px;
+  top: -8px;
+	bottom: auto;
+	border: 32px solid;
+	border-color: #666 transparent transparent transparent;
+}
+.tri-right.right-top:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: auto;
+	right: -20px;
+  top: 0px;
+	bottom: auto;
+	border: 20px solid;
+	border-color: lightyellow transparent transparent transparent;
+}
+
+/* talk bubble contents */
+.talktext{
+  padding: 1em;
+	text-align: left;
+  line-height: 1.5em;
+}
+.talktext p{
+  /* remove webkit p margins */
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
 }

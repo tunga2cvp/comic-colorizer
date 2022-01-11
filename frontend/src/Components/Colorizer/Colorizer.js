@@ -44,7 +44,11 @@ const SingleImageColorizer = () => {
     }
     return (
         <div className='box1 single-image-wrapper'>
-            <p className="speech left">Try it yourself!</p>
+            <div className="talk-bubble tri-right border round btm-left-in">
+                <div className="talktext">
+                    <p>Try it out!</p>
+                </div>
+            </div>
             <div className='image-holder border-gradient border-gradient-purple'>
                 <div id="loading-wrapper">
                     <div id="loading-content"></div>
@@ -69,17 +73,17 @@ const SingleImageColorizer = () => {
                 </div>
             </div>
             <div className='buttons-holder'>
-                <button className="btn-rave" onClick={uploadImage}>
+                <button className="custom-btn btn-7" onClick={uploadImage}>
                     Upload Image
                 </button>
                 {/* <button className="btn-rave" onClick={removeSelectedImage}>
                     Remove This Image
                 </button> */}
-                <button className="btn-rave" onClick={colorize}>
+                <button className="custom-btn btn-13" onClick={colorize}>
                     Colorize
                 </button>
-                <button className="btn-rave" onClick={downloadImage}>
-                    Dowload Image
+                <button className="custom-btn btn-15" onClick={downloadImage}>
+                    Dowload
                 </button>
             </div>
         </div>
@@ -147,12 +151,16 @@ const DoubleImageColorizer = () => {
     }
     return (
         <div className='box1 double-image-wrapper'>
-            <p className="speech big-left">Not happy with the result? Try adding an image with similar color theme </p>
+            <div className="talk-bubble tri-right border round btm-left-in">
+                <div className="talktext">
+                    <p>Not happy with the result? Try adding an image with similar color theme</p>
+                </div>
+            </div>
             <div className='double-image-holder'>
                 <div className='single-image-holder no-color-image border-gradient border-gradient-purple'>
                     <div>
-                        <button className='btn-rave center-height' id='upload-nocolor-btn' onClick={uploadColorlessImage}>
-                            Upload your <br></br> colorless image
+                        <button className='custom-btn btn-7 center-height' id='upload-nocolor-btn' onClick={uploadColorlessImage}>
+                            Upload <br></br> Source Image
                         </button>
                         <div>
                             <input
@@ -185,8 +193,8 @@ const DoubleImageColorizer = () => {
                     )} */}
                 <div className='single-image-holder border-gradient border-gradient-purple' id='color-image'>
                     <div>
-                        <button className='btn-rave center-height' id='upload-color-btn' onClick={uploadColorImage}>
-                            Upload your <br></br> color image
+                        <button className='custom-btn btn-7 center-height' id='upload-color-btn' onClick={uploadColorImage}>
+                            Upload <br></br> Color Image
                         </button>
                         <div>
                             <input
@@ -213,14 +221,14 @@ const DoubleImageColorizer = () => {
                 </div>
             </div>
             <div className='buttons-holder'>
-                <button className="btn-rave" onClick={removeImages}>
+                <button className="custom-btn btn-5" onClick={removeImages}>
                     Remove Images
                 </button>
-                <button className="btn-rave" onClick={colorize}>
+                <button className="custom-btn btn-13" onClick={colorize}>
                     Colorize
                 </button>
-                <button className="btn-rave" onClick={downloadImage}>
-                    Dowload Image
+                <button className="custom-btn btn-15" onClick={downloadImage}>
+                    Dowload
                 </button>
             </div>
         </div>
@@ -232,6 +240,8 @@ const AdvanceColorizer = () => {
     const [color2, setColor2] = useColor("hex", "#121212");
     const [color3, setColor3] = useColor("hex", "#121212");
     const [advanceImage, setadvanceImage] = useState();
+    const [previewImage, setpreviewImage] = useState();
+    const [resultImage, setresultImage] = useState();
     useEffect(() => {
         initAndSetupTheSliders()
     }, [])
@@ -288,11 +298,20 @@ const AdvanceColorizer = () => {
     };
     const advanceImageChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
-            console.log(e.target.files)
             setadvanceImage(e.target.files[0]);
-            document.getElementsByClassName('advance-image-holder')[0].style = "border:none";
+            document.getElementsByClassName('custom-image-holder')[0].style = "border:none";
         }
     };
+    const previewImageChange = (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setpreviewImage(e.target.files[0]);
+        }
+    };
+    const resultImageChange = (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setresultImage(e.target.files[0]);
+        }
+    }
     const removeSelectedImage = () => {
         setadvanceImage();
         document.getElementsByClassName('image-holder')[0].style = "border:3px solid black";
@@ -301,14 +320,42 @@ const AdvanceColorizer = () => {
         document.getElementById('advance-image-input').click();
     }
     function colorize() {
-        // console.log(color1.rgb)
-        // console.log(color2.rgb)
-        // console.log(color3.rgb)
         const ratio1 = document.getElementById("ratio1")?.value;
         const ratio2 = document.getElementById("ratio2")?.value;
         const ratio3 = document.getElementById("ratio3")?.value;
         let color = [color1.rgb.r, color1.rgb.g, color1.rgb.b, ratio1, color2.rgb.r, color2.rgb.g, color2.rgb.b, ratio2, color3.rgb.r, color3.rgb.g, color3.rgb.b, ratio3];
         console.log(color.toString())
+        var formData = new FormData();
+        const threshold = parseInt(document.getElementById("threshold")?.value) / 100;
+        formData.append("source_image", advanceImage);
+        formData.append("color", color.toString())
+        formData.append("threshold", threshold);
+        console.log(formData)
+        document.getElementById("loading-wrapper-advance").style.display = "block"
+        document.getElementsByClassName("result-image-holder")[0].style.display = "none"
+        axios.post('http://127.0.0.1:5000/api/v1/predict/3', formData, { responseType: 'blob' }).then((res) => {
+            const file = new File([res.data], "transformed");
+            document.getElementById("loading-wrapper-advance").style.display = "none"
+            document.getElementsByClassName("result-image-holder")[0].style.display = "block"
+            setresultImage(file);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+    const preview = () => {
+        var formData = new FormData();
+        const threshold = parseInt(document.getElementById("threshold")?.value) / 100;
+        formData.append("source_image", advanceImage);
+        formData.append("threshold", threshold);
+        console.log(formData)
+        axios.post('http://127.0.0.1:5000/api/v1/preview', formData, { responseType: 'blob' }).then((res) => {
+            const file = new File([res.data], "transformed");
+            setpreviewImage(file);
+            console.log(threshold)
+            document.getElementsByClassName('custom-image-holder')[1].style = "border:none";
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
     function downloadImage() {
         FileSaver.saveAs(advanceImage, 'colorized.jpg')
@@ -316,11 +363,16 @@ const AdvanceColorizer = () => {
     }
     return (
         <div className='box1 box advance-wrapper'>
-            <div><p className="speech big-left">Still not satisfied ? Say hello to our secrete weapon, the full options advanced mode </p></div>
+            {/* <div><p className="speech big-left">Still not satisfied ? Say hello to our secrete weapon, the full options advanced mode </p></div> */}
+            <div className='buble-wrap'>
+                <div class="bubble bubble--highlight">
+                    Advance Comic Colorizer
+                </div>
+            </div>
             <div className='triple-image-holder'>
-                <div className='advance-image-holder'>
+                <div className='advance-image-holder '>
                     Let start by uploading your colorless image <br></br>
-                    <div className='image-holder'>
+                    <div className='custom-image-holder border-gradient border-gradient-purple'>
                         <div>
                             <input
                                 accept="image/*"
@@ -341,19 +393,19 @@ const AdvanceColorizer = () => {
                         </div>
                     </div>
                     <div className='buttons-holder'>
-                        <button className="btn-rave" onClick={uploadImage}>
+                        <button className="custom-btn btn-7" onClick={uploadImage}>
                             Upload Image
                         </button>
-                        <button className="btn-rave" onClick={colorize}>
+                        {/* <button className="btn-rave" onClick={colorize}>
                             Colorize
-                        </button>
+                        </button> */}
                         {/* <button className="btn-rave" onClick={downloadImage}>
                             Dowload Image
                         </button> */}
                     </div>
                 </div>
                 <div className='param-picker'>
-                    Then, picking the right param can be very helpful
+                    Then, setting the correct ratio of the smallest frame to the whole comic page can be very helpful
                     <div className="container">
                         <div className="donut-chart-block block">
                             <div className="donut-chart">
@@ -372,45 +424,91 @@ const AdvanceColorizer = () => {
                             </div>
                         </div>
                         <div className="range-slider">
-                            <input type="range" orient="vertical" min="0" max="100" value="6" />
+                            <input type="range" orient="vertical" min="0" max="15" id='threshold' />
                             <div className="range-slider__bar"></div>
                             <div className="range-slider__thumb"></div>
                         </div>
                     </div>
-                    {/* <div class="wrapper">
-                        <a class="cta" href="#">
-                            <span className='nice-btn'>COLORIZE</span>
-                            <span className='nice-btn'>
-                                <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xlinkHref="http://www.w3.org/1999/xlink">
-                                    <g id="arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <path class="one" d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z" fill="#FFFFFF"></path>
-                                        <path class="two" d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z" fill="#FFFFFF"></path>
-                                        <path class="three" d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z" fill="#FFFFFF"></path>
-                                    </g>
-                                </svg>
-                            </span>
-                        </a>
-                    </div> */}
-                      <button className="custom-btn btn-6"><span>Test parameter</span></button>
+                    <button className="custom-btn btn-6" onClick={preview}><span>Test parameter</span></button>
                 </div>
-                <div className='color-picker'>
-                    Finally, choose 3 colors for your picture <br></br> and their corresponding effect ratio
-                    <div className='color-selector margin-top'>
-                        {/* Let start by choosing 3 colors for your image */}
-                        <div className='inline-block'><ColorPicker width={250} height={50} color={color1} onChange={setColor1} hideHSV light hideHEX /></div>
-                        <input type="range" orient="vertical" id='ratio1' />
-                    </div>
-                    <div className='color-selector'>
-                        <div className='inline-block'><ColorPicker width={250} height={50} color={color2} onChange={setColor2} hideHSV light hideHEX /></div>
-                        <input type="range" orient="vertical" id='ratio2' />
-                    </div>
-                    <div className='color-selector'>
-                        <div className='inline-block'><ColorPicker width={250} height={50} color={color3} onChange={setColor3} hideHSV light hideHEX /></div>
-                        <input type="range" orient="vertical" id='ratio3' />
+                <div className='preview-image-holder'>
+                    The green border frames will be colored <br></br>
+                    <div className='custom-image-holder border-gradient border-gradient-purple'>
+                        <div>
+                            <input
+                                accept="image/*"
+                                type="file"
+                                onChange={previewImageChange}
+                                className='hidden'
+                                id='preview-image-input'
+                            />
+                            {previewImage && (
+                                <div>
+                                    <img
+                                        src={URL.createObjectURL(previewImage)}
+                                        alt="Thumb"
+                                        className='uploaded-image'
+                                    />
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
-
+            Finally, choose 3 colors for your picture and their corresponding effect ratio
+            <div className='color-picker'>
+                <div className='color-selector'>
+                    <div className='inline-block'><ColorPicker width={250} height={50} color={color1} onChange={setColor1} hideHSV light hideHEX /></div>
+                    <input type="range" orient="vertical" id='ratio1' />
+                </div>
+                <div className='color-selector'>
+                    <div className='inline-block'><ColorPicker width={250} height={50} color={color2} onChange={setColor2} hideHSV light hideHEX /></div>
+                    <input type="range" orient="vertical" id='ratio2' />
+                </div>
+                <div className='color-selector'>
+                    <div className='inline-block'><ColorPicker width={250} height={50} color={color3} onChange={setColor3} hideHSV light hideHEX /></div>
+                    <input type="range" orient="vertical" id='ratio3' />
+                </div>
+            </div>
+            <div className="wrapper">
+                <a className="cta" onClick={colorize}>
+                    <span className='nice-btn'>COLORIZE</span>
+                    <span className='nice-btn'>
+                        <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xlinkHref="http://www.w3.org/1999/xlink">
+                            <g id="arrow" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                                <path className="one" d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z" fill="#FFFFFF"></path>
+                                <path className="two" d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z" fill="#FFFFFF"></path>
+                                <path className="three" d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z" fill="#FFFFFF"></path>
+                            </g>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+            <div id="loading-wrapper-advance">
+                <div id="loading-content"></div>
+            </div>
+            <div className='result-image-holder'>
+                <div className='result-custom-image-holder border-gradient border-gradient-purple'>
+                    <div>
+                        <input
+                            accept="image/*"
+                            type="file"
+                            onChange={resultImageChange}
+                            className='hidden'
+                            id='result-image-input'
+                        />
+                        {resultImage && (
+                            <div>
+                                <img
+                                    src={URL.createObjectURL(resultImage)}
+                                    alt="Thumb"
+                                    className='uploaded-image'
+                                />
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
