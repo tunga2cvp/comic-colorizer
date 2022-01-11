@@ -3,9 +3,12 @@ from flask_restx import Resource, Api
 from werkzeug.utils import secure_filename
 import config as config
 from src.colorizer import predict
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 api = Api(app)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @api.route('/')

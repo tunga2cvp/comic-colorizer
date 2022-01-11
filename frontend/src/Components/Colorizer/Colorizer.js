@@ -391,7 +391,7 @@ const AdvanceColorizer = () => {
                             </span>
                         </a>
                     </div> */}
-                      <button class="custom-btn btn-6"><span>Test parameter</span></button>
+                      <button className="custom-btn btn-6"><span>Test parameter</span></button>
                 </div>
                 <div className='color-picker'>
                     Finally, choose 3 colors for your picture <br></br> and their corresponding effect ratio
