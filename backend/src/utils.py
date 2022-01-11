@@ -471,11 +471,15 @@ class ColorModel():
                                     )
         return colored_page
 
+
 def clean_image_folder(s):
     import os, shutil
     import time
     time.sleep(s)
-    for folder in [config.SOURCE_IMAGES_PATH, config.RESULT_IMAGES_PATH, config.SUPPLEMENT_IMAGES_PATH]:
+    for folder in [config.SOURCE_IMAGES_PATH,
+                   config.RESULT_IMAGES_PATH,
+                   config.SUPPLEMENT_IMAGES_PATH,
+                   config.PREVIEW_IMAGES_PATH]:
         for filename in os.listdir(folder):
             file_path = os.path.join(folder, filename)
             try:
@@ -485,6 +489,7 @@ def clean_image_folder(s):
                     shutil.rmtree(file_path)
             except Exception as e:
                 print('Failed to delete %s. Reason: %s' % (file_path, e))
+
 
 def clean_image_folder_after(s):
     import threading

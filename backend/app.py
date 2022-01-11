@@ -66,7 +66,24 @@ class ColorizedImage(Resource):
                 }
         except:
             return {
-                'msg': "Server bị lỗi."
+                'msg': "Invalid input."
+            }
+
+
+@api.route('/api/v1/preview', methods=['POST'])
+class PreviewImage(Resource):
+    def post(self):
+        try:
+            files = request.files
+            data = request.form
+
+            source_image = files.get('source_image')
+            source_image.save(f'{config.SOURCE_IMAGES_PATH}/{source_image.filename}')
+            predict(mode=4, filename=source_image.filename, threshold=float(data.get('threshold', '0')))
+            return send_file(f'{config.PREVIEW_IMAGES_PATH}/{source_image.filename}', mimetype=source_image.mimetype)
+        except:
+            return {
+                'msg': "Invalid input."
             }
 
 
