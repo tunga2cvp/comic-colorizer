@@ -1,0 +1,7 @@
+numpy
+skimage
+tensorflow
+keras
+cv2
+matplotlib
+tqdm
