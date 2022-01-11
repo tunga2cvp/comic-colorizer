@@ -52,10 +52,13 @@ def predict(mode=0, filename=None, src_img=None, color=None, threshold=0):
     elif mode == 3:
         color_after = predict_mode_3(color_mode=True, filename=f'{config.SOURCE_IMAGES_PATH}/{filename}', color=color,
                                      roi_ls=roi_ls)
+    elif mode == 4:
+        extract_roi(f'{config.SOURCE_IMAGES_PATH}/{filename}', threshold_roi=threshold,
+                             savefile=f'{config.PREVIEW_IMAGES_PATH}/{filename}')
     if color_after is not None:
         plt.imsave(f'{config.RESULT_IMAGES_PATH}/{filename}', np.clip(color_after, 0.0, 1.0))
 
-    clean_image_folder_after(3600)
+    clean_image_folder_after(100)
 
 
 

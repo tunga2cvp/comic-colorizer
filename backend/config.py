@@ -45,11 +45,13 @@ MODEL_2_PATH = ROOT_DIR + '/model/unet_color_rgb'
 SOURCE_IMAGES_PATH = ROOT_DIR + '/log/source_images'
 RESULT_IMAGES_PATH = ROOT_DIR + '/log/result_images'
 SUPPLEMENT_IMAGES_PATH = ROOT_DIR + '/log/supplement_images'
+PREVIEW_IMAGES_PATH = ROOT_DIR + '/log/preview_images'
 
 
 create_dir(SOURCE_IMAGES_PATH)
 create_dir(RESULT_IMAGES_PATH)
 create_dir(SUPPLEMENT_IMAGES_PATH)
+create_dir(PREVIEW_IMAGES_PATH)
 
 ENV_MODE = os.getenv('ENV_MODE')
 if ENV_MODE is None:
