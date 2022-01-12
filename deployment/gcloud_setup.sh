@@ -14,7 +14,7 @@ gcloud artifacts repositories create comic-colorizer \
 cd "$PATH_TO_PROJECT/comic-colorizer" || exit
 cd backend || exit
 docker build -t comic-colorizer-backend:1.0.0 .
-docker tag comic-colorizer-backend:1.0.0 asia-southeast1-docker.pkg.dev/${PROJECT_ID}/comic-colorizer/comic-colorizer-backend:v1c
+docker tag comic-colorizer-backend:1.0.0 asia-southeast1-docker.pkg.dev/${PROJECT_ID}/comic-colorizer/comic-colorizer-backend:v1
 gcloud auth configure-docker asia-southeast1-docker.pkg.dev
 docker push asia-southeast1-docker.pkg.dev/comvis-ict-2021/comic-colorizer/comic-colorizer-backend:v1
 # create cluster = {mode = autopilot}
@@ -32,6 +32,6 @@ kubectl get deploy
 kubectl logs deploy/comic-colorizer-backend
 kubectl logs -f deploy/comic-colorizer-backend
 # deploy backend network service
-kubectl expose deployment comic-colorizer-backend --name=comic-colorizer-service --type=LoadBalancer --port 5000 --target-port 5000
+kubectl expose deployment comic-colorizer-backend --name=comic-colorizer-service --type=LoadBalancer --port 5000 --target-port 8765
 kubectl get service
 telnet 34.126.128.91 5000

@@ -14,12 +14,14 @@ spec:
     spec:
       containers:
         - name: comic-colorizer-backend
-          image: asia-southeast1-docker.pkg.dev/comvis-ict-2021/comic-colorizer/comic-colorizer-backend:v1
+          image: asia-southeast1-docker.pkg.dev/comvis-ict-2021/comic-colorizer/comic-colorizer-backend:v4-release
           ports:
             - containerPort: 5000
           resources:
             limits:
-              cpu: "2"
+              cpu: "4"
+              memory: "8Gi"
             requests:
               cpu: "2"
+              memory: "4Gi"
       restartPolicy: Always

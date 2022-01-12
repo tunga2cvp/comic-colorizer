@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comic-colorizer-frontend
+spec:
+  selector:
+    matchLabels:
+      app: comic-colorizer-frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: comic-colorizer-frontend
+    spec:
+      containers:
+        - name: comic-colorizer-frontend
+          image: asia-southeast1-docker.pkg.dev/comvis-ict-2021/comic-colorizer/comic-colorizer-frontend:v2-release
+          ports:
+            - containerPort: 3000
+          env:
+          - name: REACT_APP_SERVER_ADDRESS
+            value: "http://34.124.150.215:5000"
+          resources:
+            limits:
+              cpu: "2"
+              memory: "4G"
+            requests:
+              cpu: "1"
+              memory: "2G"
+      restartPolicy: Always
