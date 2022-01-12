@@ -14,7 +14,7 @@ npm run start
 cd backend
 python app.py
 ```
-### Container
+### 2. As Container
 #### Build image
 ```bash
 cd frontend
@@ -36,6 +36,7 @@ To check the public IP of our containers, run
 ```bash
 kubectl get service
 ```
+**Note**:   
 For detailed configuration, please check yaml files in `deployment` directory. An extra Google Cloud setup script is also included.
 ## Website Previews 
 
