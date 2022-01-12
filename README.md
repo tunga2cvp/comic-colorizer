@@ -53,15 +53,15 @@ Meanwhile, the notebook [coverage_area](https://github.com/tunga2cvp/comic-color
 
 ### Model training
 
-The two notebooks [model_encoder_lab](https://github.com/tunga2cvp/comic-colorizer/blob/master/model_encoder_lab.ipynb) and [model_unet_rgb](https://github.com/tunga2cvp/comic-colorizer/blob/master/model_unet_rgb.ipynb) details the training of an encoder-decoder model using Lab color space and a u-net model using RGB color space. Since the method of color extraction is independent of the model architecture, one can easily build an encoder-decoder model using RGB color space and a u-net model using Lab color space by swapping the color extraction methods.
+The two notebooks [model_encoder_lab](https://github.com/tunga2cvp/comic-colorizer/blob/master/core/model_encoder_lab.ipynb) and [model_unet_rgb](https://github.com/tunga2cvp/comic-colorizer/blob/master/core/model_unet_rgb.ipynb) details the training of an encoder-decoder model using Lab color space and a u-net model using RGB color space. Since the method of color extraction is independent of the model architecture, one can easily build an encoder-decoder model using RGB color space and a u-net model using Lab color space by swapping the color extraction methods.
 
-Note that there are several steps in preprocessing images for Lab and RGB color space model, and readers should concentrate on the methods of the class DataSequence in each notebook. These preprocessing steps can also be found in the [utils.py](https://github.com/tunga2cvp/comic-colorizer/blob/master/utils.py).
+Note that there are several steps in preprocessing images for Lab and RGB color space model, and readers should concentrate on the methods of the class DataSequence in each notebook. These preprocessing steps can also be found in the [utils.py](https://github.com/tunga2cvp/comic-colorizer/blob/master/core/utils.py).
 
 ### Testing
 
-The testing methods are mainly implemented in the file [utils.py](https://github.com/tunga2cvp/comic-colorizer/blob/master/utils.py). The notebook [image_test](https://github.com/tunga2cvp/comic-colorizer/blob/master/image_test.ipynb) utilizes these methods extensively. Inside you can find several example to get used to the testing process.
+The testing methods are mainly implemented in the file [utils.py](https://github.com/tunga2cvp/comic-colorizer/blob/master/core/utils.py). The notebook [image_test](https://github.com/tunga2cvp/comic-colorizer/blob/master/core/image_test.ipynb) utilizes these methods extensively. Inside you can find several example to get used to the testing process.
 
-The two main modes of testing are: using the panels extracted in the [Test](https://github.com/tunga2cvp/comic-colorizer/blob/master) folder (panel level testing) and page level testing. Page level testing then contains three additional modes:
+The two main modes of testing are: using the panels extracted in the Test folder (panel level testing) and page level testing. Page level testing then contains three additional modes:
 
 -	self-testing, load in a colored manga page to compare the output with the original page.
 -	source image color transfer, load in a grayscale manga page and a source image to transfer color from.
