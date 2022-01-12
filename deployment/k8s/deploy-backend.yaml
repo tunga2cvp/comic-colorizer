@@ -19,7 +19,9 @@ spec:
             - containerPort: 5000
           resources:
             limits:
-              cpu: "2"
+              cpu: "3"
+              memory: "4G"
             requests:
               cpu: "2"
+              memory: "2G"
       restartPolicy: Always
