@@ -9,34 +9,34 @@ const NoColor = () => {
                 <div className='flipbook-container'>
                     <HTMLFlipBook width={320} height={486.25}>
                         <div className="demoPage odd-page">
-                            <img src="/assets/sample_imgs/sample_page1.jpg" alt='pic1'></img>
+                            <img src="/assets/sample_imgs/sample_page1.png" alt='pic1'></img>
                         </div>
                         <div className="demoPage">
-                            <img src="/assets/sample_imgs/sample_page2.jpg" alt='pic1'></img>
+                            <img src="/assets/sample_imgs/sample_page2.png" alt='pic1'></img>
                         </div>
                         <div className="demoPage odd-page">
-                            <img src="/assets/sample_imgs/sample_page3.jpg" alt='pic1'></img>
+                            <img src="/assets/sample_imgs/sample_page3.png" alt='pic1'></img>
                         </div>
                         <div className="demoPage">
-                            <img src="/assets/sample_imgs/sample_page4.jpg" alt='pic1'></img>
+                            <img src="/assets/sample_imgs/sample_page4.png" alt='pic1'></img>
                         </div>
                         <div className="demoPage odd-page">
-                            <img src="/assets/sample_imgs/sample_page5.jpg" alt='pic1'></img>
+                            <img src="/assets/sample_imgs/sample_page5.png" alt='pic1'></img>
                         </div>
                         <div className="demoPage">
-                            <img src="/assets/sample_imgs/sample_page6.jpg" alt='pic1'></img>
+                            <img src="/assets/sample_imgs/sample_page6.png" alt='pic1'></img>
                         </div>
                         <div className="demoPage odd-page">
-                            <img src="/assets/sample_imgs/sample_page7.jpg" alt='pic1'></img>
+                            <img src="/assets/sample_imgs/sample_page7.png" alt='pic1'></img>
                         </div>
                         <div className="demoPage">
-                            <img src="/assets/sample_imgs/sample_page8.jpg" alt='pic1'></img>
+                            <img src="/assets/sample_imgs/sample_page8.png" alt='pic1'></img>
                         </div>
                         <div className="demoPage odd-page">
-                            <img src="/assets/sample_imgs/sample_page9.jpg" alt='pic1'></img>
+                            <img src="/assets/sample_imgs/sample_page9.png" alt='pic1'></img>
                         </div>
                         <div className="demoPage">
-                            <img src="/assets/sample_imgs/sample_page10.jpg" alt='pic1'></img>
+                            <img src="/assets/sample_imgs/sample_page10.png" alt='pic1'></img>
                         </div>
                     </HTMLFlipBook>
                 </div>
