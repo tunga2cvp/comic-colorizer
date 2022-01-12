@@ -452,6 +452,8 @@ const AdvanceColorizer = (props) => {
         formData.append("source_image", advanceImage);
         formData.append("threshold", threshold);
         console.log(formData);
+        setpreviewImage()
+        document.getElementById("loading-wrapper-preview").style.display = "block"
         axios
             .post(`${process.env.REACT_APP_SERVER_ADDRESS}/api/v1/preview`, formData, {
                 responseType: "blob",
@@ -462,6 +464,7 @@ const AdvanceColorizer = (props) => {
                 console.log(threshold);
                 document.getElementsByClassName("custom-image-holder")[1].style =
                     "border:none";
+                document.getElementById("loading-wrapper-preview").style.display = "none"
             })
             .catch(function (error) {
                 console.log(error);
@@ -569,8 +572,12 @@ const AdvanceColorizer = (props) => {
                                     />
                                 </div>
                             )}
+                        <div id="loading-wrapper-preview">
+                            <div id="loading-content"></div>
+                        </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             Finally, choose 3 colors for your picture and their corresponding effect
