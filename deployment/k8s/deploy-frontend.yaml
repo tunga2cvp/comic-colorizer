@@ -18,8 +18,8 @@ spec:
           ports:
             - containerPort: 3000
           env:
-          - name: comic-colorizer-backend
-            value: "34.124.150.215:5000"
+          - name: REACT_APP_SERVER_ADDRESS
+            value: "http://34.124.150.215:5000"
           resources:
             limits:
               cpu: "2"
