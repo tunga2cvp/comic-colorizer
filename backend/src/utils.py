@@ -240,19 +240,19 @@ def colorize_test(model, testPath, resnet, color_space, color_mode=False, num_im
 
 
 def display_test(output, y_img, save_path='result/panel', is_save=None):
-    fig, axs = plt.subplots(len(output), 3)
-    fig.set_size_inches(30,10)
+    # fig, axs = plt.subplots(len(output), 3)
+    # fig.set_size_inches(30,10)
     for i in range(len(output)):
         image = output[i]
 
         img = img_to_array(load_img(y_img[i]))
         img = 1.0/255*img
         img_gray = gray2rgb(rgb2gray(img))
-        axs[i, 0].imshow(img_gray)
+        # axs[i, 0].imshow(img_gray)
 
-        axs[i, 1].imshow(resize(image, (img.shape)))
+        # axs[i, 1].imshow(resize(image, (img.shape)))
 
-        axs[i, 2].imshow(img)
+        # axs[i, 2].imshow(img)
 
         if is_save is not None:
             root_name = y_img[i].split('/')[-1]
@@ -347,8 +347,8 @@ def extract_roi(img_path, threshold_roi=1/16, threshold_iou=0.2, savefile=None):
         roi_ls.append((x,y,w,h,roi))
         cv2.rectangle(image,(x,y),(x+w,y+h),(0,255,0),2)
 
-    plt.figure(figsize = (15,15))
-    plt.imshow(image)
+    # plt.figure(figsize = (15,15))
+    # plt.imshow(image)
     if savefile is not None:
         plt.imsave(savefile, image)
 
@@ -382,14 +382,14 @@ def colorize_page(model, roi_ls, resnet, color_space, color_mode=False, src_img=
 
 
 def display_page(img_path, output, y_img, save_path='result/page', is_save=None):
-    fig, axs = plt.subplots(1,3)
-    fig.set_size_inches(50,50)
+    # fig, axs = plt.subplots(1,3)
+    # fig.set_size_inches(50,50)
     origin_img = img_to_array(load_img(img_path))
     origin_img = np.array(origin_img, dtype=np.float32)
     origin_img = 1.0/255*origin_img
     grayscaled_img = gray2rgb(rgb2gray(origin_img))
     
-    axs[0].imshow(grayscaled_img)
+    # axs[0].imshow(grayscaled_img)
 
     model_img = grayscaled_img.copy()
 
@@ -399,9 +399,9 @@ def display_page(img_path, output, y_img, save_path='result/page', is_save=None)
         image = resize(image, (h, w))
         model_img[y:y+h, x:x+w, :] = image
     
-    axs[1].imshow(model_img)
+    # axs[1].imshow(model_img)
 
-    axs[2].imshow(origin_img)
+    # axs[2].imshow(origin_img)
 
     if is_save is not None:
         root_name = img_path.split('/')[-1]
