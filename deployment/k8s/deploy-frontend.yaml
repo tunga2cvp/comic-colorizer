@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: comic-colorizer-frontend
-          image: asia-southeast1-docker.pkg.dev/comvis-ict-2021/comic-colorizer/comic-colorizer-frontend:v2-release
+          image: asia-southeast1-docker.pkg.dev/comvis-ict-2021/comic-colorizer/comic-colorizer-frontend:v3-release
           ports:
             - containerPort: 3000
           env:

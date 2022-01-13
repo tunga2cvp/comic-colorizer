@@ -23,6 +23,8 @@ Our project outputs 2 products:
 
 
 
+
+
 ## Core Model: Manga Colorization
 ### Manga Colorization - Dataset and Model training
 
